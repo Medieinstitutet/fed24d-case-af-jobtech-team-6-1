@@ -3,8 +3,8 @@ import type { Job } from "../models/Job";
 import { useFavorites } from "../contexts/FavoritesContext";
 
 export default function JobList() {
-  const data = useLoaderData() as { hits: Job[] } | Job[];
-  const jobs = Array.isArray(data) ? data : data.hits;
+  const data = useLoaderData() as { hits: Job[] } | Job[] | undefined; 
+  const jobs = Array.isArray(data) ? data : data?.hits ?? [];           
 
   const { addFavorite, isFavorite } = useFavorites();
 

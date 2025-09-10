@@ -2,12 +2,12 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
-import { FavoritesProvider } from "./contexts/FavoritesContext";
+import { FavoritProvider } from "./contexts/FavoritesContext";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <FavoritesProvider>
+    <FavoritProvider>
       <App />
-    </FavoritesProvider>
+    </FavoritProvider>
   </StrictMode>
 );
