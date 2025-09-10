@@ -6,7 +6,7 @@ import { jobLoader } from "./loaders/JobLoader";
 import { jobsLoader } from "./loaders/JobsLoader";
 import { JobDetails } from "./pages/JobDetails";
 import JobList from "./pages/JobList";
-
+import Favorites from "./pages/Favorites"; // ← NYTT
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +23,10 @@ export const router = createBrowserRouter([
         path: "/job",
         loader: jobLoader,
         element: <JobDetails />,
+      },
+      {
+        path: "/favorites",
+        element: <Favorites />,
       },
     ],
   },
