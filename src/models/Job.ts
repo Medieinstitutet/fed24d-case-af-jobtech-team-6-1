@@ -6,8 +6,8 @@ export type Job = {
   publication_date?: string;
   application_deadline?: string;
   webpage_url?: string;
+  isHidden: boolean;
 };
-
 
 export type JobResult =  {
   hits: Job[];
