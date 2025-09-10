@@ -1,20 +1,13 @@
-import { useEffect, useState } from "react";
-import { getJobs } from "../services/jobService";
+import { useLoaderData } from "react-router-dom";
 import type { Job } from "../models/Job";
 import { useFavorites } from "../contexts/FavoritesContext";
 
 export default function JobList() {
-  const [jobs, setJobs] = useState<Job[]> ([]);
-  const [error, setError] = useState<string | null> (null);
+  const data = useLoaderData() as { hits: Job[] } | Job[];
+  const jobs = Array.isArray(data) ? data : data.hits;
+
   const { addFavorite, isFavorite } = useFavorites();
 
-  useEffect(() => {
-    getJobs(0, 100)
-      .then(r => setJobs(r.hits))
-      .catch(() => setError("Kan ej hämta annonser"));
-  }, []);
-
-  if (error) return <p role="alert">{error}</p>;
   const visibleJobs = jobs.filter(j => !isFavorite((j as any).id));
 
   return (
