@@ -7,7 +7,7 @@ export default function JobList() {
   const [error, setError] = useState<string | null> (null);
 
   useEffect(() => {
-    getJobs(0, 10)
+    getJobs(0, 100)
       .then(r => setJobs(r.hits))
       .catch(() => setError("Kan ej hämta annonser"));
   }, []);

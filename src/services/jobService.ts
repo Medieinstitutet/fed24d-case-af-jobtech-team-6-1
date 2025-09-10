@@ -5,7 +5,7 @@ const BASE_URL = "https://jobsearch.api.jobtechdev.se/search";
 
 export const getJobs = async (
   offset = 0,
-  limit = 10,
+  limit = 100,
   occupationGroup = "2512",  // Systemutvecklare
   region = "01"  // Stockholms län
 ): Promise<JobResult> => {
