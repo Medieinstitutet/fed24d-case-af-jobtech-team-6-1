@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import type { Job } from "../models/Job";
 import { useFavorites } from "../contexts/FavoritesContext";
-import { JobActionType } from "../reducers/JobReducer";
 import { JobContext } from "../contexts/JobContext";
 import { NavLink } from "react-router";
+import { useJobActions } from "../hooks/useJobAction";
 
 export default function JobList() {
 //  const data = useLoaderData() as { hits: Job[] } | Job[] | undefined;
 //  const initialJobs = Array.isArray(data) ? data : data?.hits ?? [];
-  const { jobs, dispatch } = useContext(JobContext);
+  const { jobs } = useContext(JobContext);
 
   const { addFavorite, isFavorite } = useFavorites();
 
@@ -16,17 +16,19 @@ export default function JobList() {
 
   visibleJobs = jobs.filter((j) => !j.isHidden);
 
-  function removeJob(id: string) {
-    console.log("hej");
-    if (id) {
-      console.log("hallå");
-      dispatch({
-        type: JobActionType.REMOVEADD,
-        payload: id,
-      });
-    }
-    console.log(id);
-  }
+  const { removeJob } = useJobActions();
+
+  // function removeJob(id: string) {
+  //   console.log("hej");
+  //   if (id) {
+  //     console.log("hallå");
+  //     dispatch({
+  //       type: JobActionType.REMOVEADD,
+  //       payload: id,
+  //     });
+  //   }
+  //   console.log(id);
+  // }
 
   return (
     <section>
