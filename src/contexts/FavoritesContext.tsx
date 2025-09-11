@@ -3,13 +3,13 @@ import type { Job } from "../models/Job";
 import { favoritReducer } from "../reducers/favoritReducer";
 
 export const FavoritContext = createContext<fav | undefined>(undefined);
-
 type fav = {
   favorites: Job[];
   addFavorite: (job: Job) => void;
   removeFavorite: (id: string | number) => void;
   isFavorite: (id: string | number) => boolean;
 };
+
 
 export function FavoritProvider({ children }: { children: React.ReactNode }) {
   const [favoritesMap, dispatch] = useReducer(favoritReducer, {}, () => {
