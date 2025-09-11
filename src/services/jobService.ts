@@ -20,10 +20,3 @@ export const getJobs = async (
 
   return get<JobResult>(`${BASE_URL}?${params.toString()}`);
 };
-
-
-
-
-
-
-

@@ -1,20 +1,20 @@
 import { useContext } from "react";
-import { useLoaderData } from "react-router-dom";
 import type { Job } from "../models/Job";
 import { useFavorites } from "../contexts/FavoritesContext";
 import { JobActionType } from "../reducers/JobReducer";
 import { JobContext } from "../contexts/JobContext";
+import { NavLink } from "react-router";
 
 export default function JobList() {
-  const data = useLoaderData() as { hits: Job[] } | Job[] | undefined;
-  const initialJobs = Array.isArray(data) ? data : data?.hits ?? [];
+//  const data = useLoaderData() as { hits: Job[] } | Job[] | undefined;
+//  const initialJobs = Array.isArray(data) ? data : data?.hits ?? [];
   const { jobs, dispatch } = useContext(JobContext);
 
   const { addFavorite, isFavorite } = useFavorites();
 
-  let visibleJobs = initialJobs.filter((j) => !isFavorite((j as Job).id));
+  let visibleJobs = jobs.filter((j) => !isFavorite((j as Job).id));
 
-  visibleJobs = visibleJobs.filter((j) => !j.isHidden);
+  visibleJobs = jobs.filter((j) => !j.isHidden);
 
   function removeJob(id: string) {
     console.log("hej");
@@ -35,7 +35,7 @@ export default function JobList() {
         {visibleJobs.map((j) => (
           <li key={j.id}>
             <button onClick={() => removeJob(j.id)}>Ta bort</button>
-            <div>{j.headline}</div>{" "}
+            <NavLink to={`/job/${j.id}`}>{j.headline}</NavLink>{" "}
             {j.employer?.name && <em> {j.employer.name} </em>}
             {j.workplace_address?.municipality && (
               <div>Ort: {j.workplace_address.municipality} </div>
