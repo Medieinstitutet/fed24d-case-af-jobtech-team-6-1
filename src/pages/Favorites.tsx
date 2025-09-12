@@ -1,6 +1,8 @@
 import { useFavoritesLogic } from "../hooks/useFavoritesLogic";
 import { DigiButton } from "@designsystem-se/af-react";
 import { DigiFormCheckbox, DigiLinkExternal } from "@designsystem-se/af-react";
+import "../styles/favorites.scss";
+
 
 export default function Favorites() {
   const {
@@ -13,8 +15,8 @@ export default function Favorites() {
     items,
   } = useFavoritesLogic();
 
-  return (
-    <section>
+   return (
+    <section className="favorites">
       <h1>Favoriter</h1>
       <p>Ansökta: {appliedCount} jobb av {total}</p>
       {items.length === 0 ? (
@@ -25,7 +27,9 @@ export default function Favorites() {
             const id = (j as any).id;
             const applied = isApplied(id);
             return (
-              <li key={id}>
+              <li
+                key={id} className={applied ? "favorite-item favorite-item--applied" : "favorite-item"}
+                >
                 <div>{j.headline}</div>{" "}
                 {j.employer?.name && <em>– {j.employer.name} </em>}
                 {j.workplace_address?.municipality && (
