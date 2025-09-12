@@ -1,4 +1,5 @@
 import { useFavoritesLogic } from "../hooks/useFavoritesLogic";
+import { DigiButton } from "@designsystem-se/af-react";
 
 export default function Favorites() {
   const {
@@ -50,13 +51,14 @@ export default function Favorites() {
                   />{" "}
                   Ansökt
                 </label>
-                <button
-                  className="btn" onClick={() => {removeFavorite(id);
+                
+                <DigiButton
+                  className="btn" onAfOnClick={() => {removeFavorite(id);
                   removeApplied(id);
                   }}
                 >
                   Ta bort från favoriter
-                </button>
+                </DigiButton>
               </li>
             );
           })}

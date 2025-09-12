@@ -4,6 +4,7 @@ import { useFavorites } from "../contexts/FavoritesContext";
 import { JobContext } from "../contexts/JobContext";
 import { NavLink } from "react-router";
 import { useJobActions } from "../hooks/useJobAction";
+import { DigiButton } from "@designsystem-se/af-react";
 
 export default function JobList() {
 //  const data = useLoaderData() as { hits: Job[] } | Job[] | undefined;
@@ -36,7 +37,11 @@ export default function JobList() {
       <ul>
         {visibleJobs.map((j) => (
           <li key={j.id}>
-            <button onClick={() => removeJob(j.id)}>Ta bort</button>
+            
+            <DigiButton onAfOnClick={() => removeJob(j.id)}>
+              Ta bort
+            </DigiButton>
+
             <NavLink to={`/job/${j.id}`}>{j.headline}</NavLink>{" "}
             {j.employer?.name && <em> {j.employer.name} </em>}
             {j.workplace_address?.municipality && (
@@ -55,9 +60,11 @@ export default function JobList() {
                 <div>Läs mer</div>
               </a>
             )}
-            <button className="btn" onClick={() => addFavorite(j)}>
+
+            <DigiButton onAfOnClick={() => addFavorite(j)}>
               Favoritmarkera
-            </button>
+            </DigiButton>
+            
           </li>
         ))}
       </ul>
