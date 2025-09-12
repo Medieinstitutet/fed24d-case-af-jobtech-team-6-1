@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
         element: <JobList />, //TESTAR ENBART!!! :)
       },
       {
-        path: "/job",
+        path: "/job/:id",
         loader: jobLoader,
         element: <JobDetails />,
       },

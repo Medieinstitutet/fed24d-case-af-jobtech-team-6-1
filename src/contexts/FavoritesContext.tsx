@@ -11,12 +11,12 @@ type fav = {
 
 export const FavoritContext = createContext<fav | undefined>(undefined);
 
-const KEY = "favorites"; 
+const KEY = "favorites";
 
 export function FavoritProvider({ children }: { children: React.ReactNode }) {
   const [favoritesMap, dispatch] = useReducer(favoritReducer, {}, () => {
     try {
-      const raw = typeof window !== "undefined" ? localStorage.getItem(KEY) : null; 
+      const raw = typeof window !== "undefined" ? localStorage.getItem(KEY) : null;
       return raw ? (JSON.parse(raw) as Record<string, Job>) : {};
     } catch {
       return {};
@@ -28,17 +28,17 @@ export function FavoritProvider({ children }: { children: React.ReactNode }) {
     try {
       localStorage.setItem(KEY, JSON.stringify(next));
     } catch {}
-  }; 
+  };
 
   const commit = (action: any) => {
     const next = favoritReducer(favoritesMap, action);
     save(next);
     dispatch(action);
-  } ;
+  };
 
   const addFavorite = (job: Job) => commit({ type: "ADD", job });
   const removeFavorite = (id: string | number) => commit({ type: "REMOVE", id });
-  const isFavorite = (id: string | number) => Boolean( favoritesMap [String(id)]);
+  const isFavorite = (id: string | number) => Boolean(favoritesMap[String(id)]);
   const favorites = Object.values(favoritesMap);
 
   return (
