@@ -1,6 +1,7 @@
 import { useFavoritesLogic } from "../hooks/useFavoritesLogic";
 import { DigiButton } from "@designsystem-se/af-react";
 import { DigiFormCheckbox, DigiLinkExternal } from "@designsystem-se/af-react";
+import { ButtonVariation } from "@designsystem-se/af";
 import "../styles/favorites.scss";
 
 
@@ -56,12 +57,16 @@ export default function Favorites() {
                   afLabel="Ansökt"
                 />
 
-                <DigiButton
-                  className="btn"
-                  onAfOnClick={() => { removeFavorite(id); removeApplied(id); }}
-                >
-                  Ta bort från favoriter
-                </DigiButton>
+              <DigiButton
+                className="btn"
+                afVariation={ButtonVariation.SECONDARY}
+                afSize="small"
+                onAfOnClick={() => { removeFavorite(id); removeApplied(id); }}
+               >
+                Ta bort från favoriter
+              </DigiButton>
+
+
               </li>
             );
           })}
