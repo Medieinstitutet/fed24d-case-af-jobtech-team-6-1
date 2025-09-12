@@ -14,7 +14,7 @@ export default function JobList() {
 
   let visibleJobs = jobs.filter((j) => !isFavorite((j as Job).id));
 
-  visibleJobs = jobs.filter((j) => !j.isHidden);
+  visibleJobs = visibleJobs.filter((j) => !j.isHidden);
 
   const { removeJob } = useJobActions();
 
