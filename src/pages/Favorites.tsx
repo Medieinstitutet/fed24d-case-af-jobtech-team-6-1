@@ -1,5 +1,6 @@
 import { useFavoritesLogic } from "../hooks/useFavoritesLogic";
 import { DigiButton } from "@designsystem-se/af-react";
+import { DigiFormCheckbox, DigiLinkExternal } from "@designsystem-se/af-react";
 
 export default function Favorites() {
   const {
@@ -35,27 +36,25 @@ export default function Favorites() {
                 )}
                 {j.publication_date && (
                   <div>
-                    Publicerad: {new Date(j.publication_date).toLocaleDateString()}
+                    Publicerad: {new Intl.DateTimeFormat('sv-SE').format(new Date(j.publication_date))}
                   </div>
                 )}
+
                 {j.webpage_url && (
-                  <a href={j.webpage_url} target="_blank" rel="noreferrer">
-                    <div>Läs mer</div>
-                  </a>
+                  <DigiLinkExternal afHref={j.webpage_url}>
+                  Läs mer
+                  </DigiLinkExternal>
                 )}
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={applied}
-                    onChange={(e) => toggleApplied(id, e.currentTarget.checked)}
-                  />{" "}
-                  Ansökt
-                </label>
-                
+
+                <DigiFormCheckbox
+                  afChecked={applied}
+                  onAfOnChange={(e: any) => toggleApplied(id, e.detail?.checked ?? !applied)}
+                  afLabel="Ansökt"
+                />
+
                 <DigiButton
-                  className="btn" onAfOnClick={() => {removeFavorite(id);
-                  removeApplied(id);
-                  }}
+                  className="btn"
+                  onAfOnClick={() => { removeFavorite(id); removeApplied(id); }}
                 >
                   Ta bort från favoriter
                 </DigiButton>
