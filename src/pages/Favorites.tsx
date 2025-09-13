@@ -16,9 +16,9 @@ export default function Favorites() {
     items,
   } = useFavoritesLogic();
 
-   return (
+  return (
     <section className="favorites">
-      <h1>Favoriter</h1>
+      <h1>Mina favoriter</h1>
       <p>Ansökta: {appliedCount} jobb av {total}</p>
       {items.length === 0 ? (
         <p>Inga Favvs ännu?</p>
@@ -30,8 +30,8 @@ export default function Favorites() {
             return (
               <li
                 key={id} className={applied ? "favorite-item favorite-item--applied" : "favorite-item"}
-                >
-                <div>{j.headline}</div>{" "}
+              >
+                <div>{j.headline}</div>
                 {j.employer?.name && <em>– {j.employer.name} </em>}
                 {j.workplace_address?.municipality && (
                   <div>Ort: {j.workplace_address.municipality}</div>
@@ -41,32 +41,33 @@ export default function Favorites() {
                 )}
                 {j.publication_date && (
                   <div>
-                    Publicerad: {new Intl.DateTimeFormat('sv-SE').format(new Date(j.publication_date))}
+                    Publicerad: {new Intl.DateTimeFormat("sv-SE").format(new Date(j.publication_date))}
                   </div>
                 )}
 
-                {j.webpage_url && (
-                  <DigiLinkExternal afHref={j.webpage_url}>
-                  Läs mer
-                  </DigiLinkExternal>
-                )}
+                <div className="actions-top">
+                  <DigiFormCheckbox
+                    afChecked={applied}
+                    onAfOnChange={(e: any) => toggleApplied(id, e.detail?.checked ?? !applied) }
+                    afLabel="Ansökt"
+                  />
 
-                <DigiFormCheckbox
-                  afChecked={applied}
-                  onAfOnChange={(e: any) => toggleApplied(id, e.detail?.checked ?? !applied)}
-                  afLabel="Ansökt"
-                />
+                  {j.webpage_url && (
+                    <DigiLinkExternal afHref={j.webpage_url}>
+                      Läs mer
+                    </DigiLinkExternal>
+                  )}
+                </div>
 
-              <DigiButton
-                className="btn"
-                afVariation={ButtonVariation.SECONDARY}
-                afSize="small"
-                onAfOnClick={() => { removeFavorite(id); removeApplied(id); }}
-               >
-                Ta bort från favoriter
-              </DigiButton>
-
-
+  
+                <DigiButton
+                  className="btn"
+                  afVariation={ButtonVariation.SECONDARY}
+                  afSize="small"
+                  onAfOnClick={() => { removeFavorite(id); removeApplied(id)}}
+                >
+                  Ta bort från favoriter
+                </DigiButton>
               </li>
             );
           })}
