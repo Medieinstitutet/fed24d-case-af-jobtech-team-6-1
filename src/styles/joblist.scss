@@ -39,72 +39,71 @@
 
   text-align: left;
   align-items: flex-start; 
-}
 
-.joblist-item .btn[href^="/job/"] {
-  font-weight: var(--digi-font-weight-semibold, 600);
-  font-size: var(--digi-font-size-lg, 1.25rem);
-  text-align: left; 
-  align-self: flex-start;
-  margin-top: 0;          
-}
-
-.joblist-item em {
-  font-style: normal;
-  color: var(--digi-text-subtle, #555);
-  font-size: var(--digi-font-size-md, 1.125rem);
-  text-align: left; 
-}
-
-.joblist-item div {
-  font-size: var(--digi-font-size-sm, 0.875rem);
-  color: var(--digi-text-subtle, #555);
-  text-align: left; 
-}
-
-.joblist-item a {
-  inline-size: fit-content;
-}
-
-.joblist-item digi-link-external {
-  display: inline-block;
-  inline-size: fit-content;
-}
-
-.joblist-item .actions-top {
-  display: flex;
-  gap: var(--digi-space-24, 1.5rem);
-  align-items: baseline;
-}
-
-.joblist-item .actions-top sc-digi-form-checkbox, 
-    
-.joblist-item .actions-top digi-form-checkbox,
-.joblist-item .actions-top a,
-.joblist-item .actions-top sc-digi-link-external, 
-.joblist-item .actions-top digi-link-external {
-  display: inline-flex;
-  align-items:  baseline;
-  line-height: var(--digi-line-height-md, 1.25);
-}
-
-.joblist-item .actions-top a {
-  svg,
-  &::part(icon) {
-    position: relative;
-    top: 2px;
+  .btn[href^="/job/"] {
+    font-weight: var(--digi-font-weight-semibold, 600);
+    font-size: var(--digi-font-size-lg, 1.25rem);
+    text-align: left; 
+    align-self: flex-start;
+    margin-top: 0;          
   }
-}
 
-.joblist-item .btn {
-  margin-top: auto;
-  align-self: flex-end;
-  margin-bottom: var(--digi-space-8, 0.5rem);
-}
+  em {
+    font-style: normal;
+    color: var(--digi-text-subtle, #555);
+    font-size: var(--digi-font-size-md, 1.125rem);
+    text-align: left; 
+  }
 
-.joblist-item--applied {
-  background-color: var(--digi-surface-selected, var(--digi-color-brand-10, #C8E9C5));
-  border-color: var(--digi-color-brand-30, #b3d4c7);
+  div {
+    font-size: var(--digi-font-size-sm, 0.875rem);
+    color: var(--digi-text-subtle, #555);
+    text-align: left; 
+  }
+
+  a {
+    inline-size: fit-content;
+  }
+
+  digi-link-external {
+    display: inline-block;
+    inline-size: fit-content;
+  }
+
+  .actions-top {
+    display: flex;
+    gap: var(--digi-space-24, 1.5rem);
+    align-items: baseline;
+
+    sc-digi-form-checkbox, 
+    digi-form-checkbox,
+    a,
+    sc-digi-link-external, 
+    digi-link-external {
+      display: inline-flex;
+      align-items:  baseline;
+      line-height: var(--digi-line-height-md, 1.25);
+    }
+
+    a {
+      svg,
+      &::part(icon) {
+        position: relative;
+        top: 2px;
+      }
+    }
+  }
+
+  .btn {
+    margin-top: auto;
+    align-self: flex-end;
+    margin-bottom: var(--digi-space-8, 0.5rem);
+  }
+
+  &--applied {
+    background-color: var(--digi-surface-selected, var(--digi-color-brand-10, #C8E9C5));
+    border-color: var(--digi-color-brand-30, #b3d4c7);
+  }
 }
 
 /* -------------------------------------------------------------------------
@@ -126,32 +125,34 @@
   --solid-scale:   0.49; //-----------------------------
   --solid-shift-x: -6px; //fungerar enbart med dessa inställnignar, just nu
   --solid-shift-y: 4px;  // ---------------------------------
-}
 
-.fav-icon digi-icon-heart,
-.fav-icon digi-icon-heart-solid {
-  position: absolute;
-  inset: 0;
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  font-size: 3rem;
-  --digi-icon-color: var(--digi-text-subtle, #C8E9C5);
-  transform-origin: center;
-}
+  digi-icon-heart,
+  digi-icon-heart-solid {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 3rem;
+    --digi-icon-color: var(--digi-text-subtle, #C8E9C5);
+    transform-origin: center;
+  }
 
-.fav-icon digi-icon-heart {
-  transform: scale(var(--outline-scale));
-}
+  digi-icon-heart {
+    transform: scale(var(--outline-scale));
+  }
 
-.fav-icon digi-icon-heart-solid {
-  display: none;
-  transform: translate(var(--solid-shift-x), var(--solid-shift-y)) scale(var(--solid-scale));
-}
+  digi-icon-heart-solid {
+    display: none;
+    transform: translate(var(--solid-shift-x), var(--solid-shift-y)) scale(var(--solid-scale));
+  }
 
-.fav-icon:hover digi-icon-heart { display: none; }
-.fav-icon:hover digi-icon-heart-solid {
-  display: block;
-  --digi-icon-color: var(--digi-color-success-50, #C8E9C5);
-  filter: invert(60%) sepia(18%) saturate(1236%) hue-rotate(79deg) brightness(100%) contrast(90%);
+  &:hover {
+    digi-icon-heart { display: none; }
+    digi-icon-heart-solid {
+      display: block;
+      --digi-icon-color: var(--digi-color-success-50, #C8E9C5);
+      filter: invert(60%) sepia(18%) saturate(1236%) hue-rotate(79deg) brightness(100%) contrast(90%);
+    }
+  }
 }
