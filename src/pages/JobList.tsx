@@ -66,7 +66,11 @@ export default function JobList() {
             </DigiLinkExternal>
               )}
 
-            <DigiButton className="btn" onAfOnClick={() => addFavorite(j)}>
+            <DigiButton
+              className="btn"
+              afVariation="primary"
+              onAfOnClick={() => addFavorite(j)}
+            >
               Favoritmarkera
             </DigiButton>
 
