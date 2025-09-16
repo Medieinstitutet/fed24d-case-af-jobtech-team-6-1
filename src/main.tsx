@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./App.tsx";
 import { FavoritProvider } from "./contexts/FavoritesContext";
 import { AppliedProvider } from "./contexts/AppliedContext.tsx";
+import '@designsystem-se/af'; 
+
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

@@ -1,4 +1,3 @@
-
 .joblist {
   max-width: 64rem;
   margin-inline: auto;
@@ -32,66 +31,127 @@
   flex-direction: column;
   gap: var(--digi-space-8, 0.5rem);
   box-shadow: var(--digi-shadow-sm, 0 1px 2px rgba(0,0,0,0.05));
+  position: relative; 
+  --fav-size: 1.5rem;
+  --fav-gap: var(--digi-space-12, 0.75rem);
+  padding-right: calc(var(--digi-space-16, 1rem) + var(--fav-size) + var(--fav-gap));
+  padding-top:  calc(var(--digi-space-16, 1rem) + var(--fav-size) + var(--fav-gap));
 
-  > div:first-of-type {
-    font-weight: var(--digi-font-weight-semibold, 600);
-    font-size: var(--digi-font-size-lg, 1.25rem);
+  text-align: left;
+  align-items: flex-start; 
+}
+
+.joblist-item .btn[href^="/job/"] {
+  font-weight: var(--digi-font-weight-semibold, 600);
+  font-size: var(--digi-font-size-lg, 1.25rem);
+  text-align: left; 
+  align-self: flex-start;
+  margin-top: 0;          
+}
+
+.joblist-item em {
+  font-style: normal;
+  color: var(--digi-text-subtle, #555);
+  font-size: var(--digi-font-size-md, 1.125rem);
+  text-align: left; 
+}
+
+.joblist-item div {
+  font-size: var(--digi-font-size-sm, 0.875rem);
+  color: var(--digi-text-subtle, #555);
+  text-align: left; 
+}
+
+.joblist-item a {
+  inline-size: fit-content;
+}
+
+.joblist-item digi-link-external {
+  display: inline-block;
+  inline-size: fit-content;
+}
+
+.joblist-item .actions-top {
+  display: flex;
+  gap: var(--digi-space-24, 1.5rem);
+  align-items: baseline;
+}
+
+.joblist-item .actions-top sc-digi-form-checkbox, 
+    
+.joblist-item .actions-top digi-form-checkbox,
+.joblist-item .actions-top a,
+.joblist-item .actions-top sc-digi-link-external, 
+.joblist-item .actions-top digi-link-external {
+  display: inline-flex;
+  align-items:  baseline;
+  line-height: var(--digi-line-height-md, 1.25);
+}
+
+.joblist-item .actions-top a {
+  svg,
+  &::part(icon) {
+    position: relative;
+    top: 2px;
   }
+}
 
-  em {
-    font-style: normal;
-    color: var(--digi-text-subtle, #555);
-    font-size: var(--digi-font-size-md, 1.125rem);
-  }
+.joblist-item .btn {
+  margin-top: auto;
+  align-self: flex-end;
+  margin-bottom: var(--digi-space-8, 0.5rem);
+}
 
-  div:nth-of-type(2),
-  div:nth-of-type(3) {
-    font-size: var(--digi-font-size-sm, 0.875rem);
-    color: var(--digi-text-subtle, #555);
-  }
+.joblist-item--applied {
+  background-color: var(--digi-surface-selected, var(--digi-color-brand-10, #C8E9C5));
+  border-color: var(--digi-color-brand-30, #b3d4c7);
+}
 
-  a {
-    inline-size: fit-content;
-  }
+/* -------------------------------------------------------------------------
+---------------------------HJÄRTAT----------------------------------------
+-------------------------------------------------------------------------- */
+.fav-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  line-height: 0;
+  cursor: pointer;
+  position: absolute; 
+  top: var(--digi-space-8, 0.5rem);    
+  right: var(--digi-space-12, 0.75rem); 
+  z-index: 1;
 
-  /* Lägg till stöd för web component-länken så den beter sig som <a> */
-  digi-link-external {
-    display: inline-block;
-    inline-size: fit-content;
-  }
+  --outline-scale: 1; // -----------------------------
+  --solid-scale:   0.49; //-----------------------------
+  --solid-shift-x: -6px; //fungerar enbart med dessa inställnignar, just nu
+  --solid-shift-y: 4px;  // ---------------------------------
+}
 
-  .actions-top {
-    display: flex;
-    gap: var(--digi-space-24, 1.5rem);
-    align-items: baseline;
+.fav-icon digi-icon-heart,
+.fav-icon digi-icon-heart-solid {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 3rem;
+  --digi-icon-color: var(--digi-text-subtle, #555);
+  transform-origin: center;
+}
 
-    sc-digi-form-checkbox,
-    digi-form-checkbox,
-    a,
-    sc-digi-link-external,
-    digi-link-external {
-      display: inline-flex;
-      align-items: baseline;
-      line-height: var(--digi-line-height-md, 1.25);
-    }
+.fav-icon digi-icon-heart {
+  transform: scale(var(--outline-scale));
+}
 
-    a {
-      svg,
-      &::part(icon) {
-        position: relative;
-        top: 2px;
-      }
-    }
-  }
+.fav-icon digi-icon-heart-solid {
+  display: none;
+  transform: translate(var(--solid-shift-x), var(--solid-shift-y)) scale(var(--solid-scale));
+}
 
-  .btn {
-    margin-top: auto;
-    align-self: flex-end;
-    margin-bottom: var(--digi-space-8, 0.5rem);
-  }
-
-  &--applied {
-    background-color: var(--digi-surface-selected, var(--digi-color-brand-10, #C8E9C5));
-    border-color: var(--digi-color-brand-30, #b3d4c7);
-  }
+.fav-icon:hover digi-icon-heart { display: none; }
+.fav-icon:hover digi-icon-heart-solid {
+  display: block;
+  --digi-icon-color: var(--digi-color-success-50, #2e7d32);
+  filter: invert(34%) sepia(18%) saturate(1236%) hue-rotate(79deg) brightness(92%) contrast(90%);
 }
