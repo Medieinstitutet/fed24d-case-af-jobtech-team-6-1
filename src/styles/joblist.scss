@@ -136,7 +136,7 @@
   width: 100%;
   height: 100%;
   font-size: 3rem;
-  --digi-icon-color: var(--digi-text-subtle, #555);
+  --digi-icon-color: var(--digi-text-subtle, #C8E9C5);
   transform-origin: center;
 }
 
@@ -152,6 +152,6 @@
 .fav-icon:hover digi-icon-heart { display: none; }
 .fav-icon:hover digi-icon-heart-solid {
   display: block;
-  --digi-icon-color: var(--digi-color-success-50, #2e7d32);
-  filter: invert(34%) sepia(18%) saturate(1236%) hue-rotate(79deg) brightness(92%) contrast(90%);
+  --digi-icon-color: var(--digi-color-success-50, #C8E9C5);
+  filter: invert(60%) sepia(18%) saturate(1236%) hue-rotate(79deg) brightness(100%) contrast(90%);
 }
