@@ -8,6 +8,13 @@ import "../styles/joblist.scss";
 import { DigiLinkExternal } from "@designsystem-se/af-react";
 import { DigiButton } from "@designsystem-se/af-react";
 
+
+// behöver ha dem såhär för att inte typescript ska bråka
+const DigiIconHeart = 'digi-icon-heart' as unknown as React.ElementType;
+const DigiIconHeartSolid = 'digi-icon-heart-solid' as unknown as React.ElementType;
+
+
+
 export default function JobList() {
 //  const data = useLoaderData() as { hits: Job[] } | Job[] | undefined;
 //  const initialJobs = Array.isArray(data) ? data : data?.hits ?? [];
@@ -66,14 +73,18 @@ export default function JobList() {
             </DigiLinkExternal>
               )}
 
-            <DigiButton
-              className="btn"
-              afVariation="primary"
-              onAfOnClick={() => addFavorite(j)}
-            >
-              Favoritmarkera
-            </DigiButton>
 
+
+            <span
+              className="fav-icon"
+              role="button"
+              tabIndex={0}
+              aria-label={`Favoritmarkera ${j.headline}`}
+              onClick={() => addFavorite(j)}
+            >
+              <DigiIconHeart />
+              <DigiIconHeartSolid />
+            </span>
             <DigiButton
               className="btn"
               afVariation="secondary"
@@ -91,7 +102,8 @@ export default function JobList() {
 
 
 
+// <digi-icon-trash></digi-icon-trash>
 
-
-
+//<digi-icon-heart></digi-icon-heart>
+//<digi-icon-heart-solid></digi-icon-heart-solid>
 
