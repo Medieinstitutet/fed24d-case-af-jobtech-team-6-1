@@ -4,6 +4,8 @@ import { useFavorites } from "../contexts/FavoritesContext";
 import { JobContext } from "../contexts/JobContext";
 import { NavLink } from "react-router";
 import { useJobActions } from "../hooks/useJobAction";
+import "../styles/joblist.scss";
+import { DigiLinkExternal } from "@designsystem-se/af-react";
 import { DigiButton } from "@designsystem-se/af-react";
 
 export default function JobList() {
@@ -32,42 +34,60 @@ export default function JobList() {
   // }
 
   return (
-    <section>
+    <section className="joblist">
       <h1>Jobb Jobb Jobb</h1>
       <ul>
         {visibleJobs.map((j) => (
-          <li key={j.id}>
-            
-            <DigiButton onAfOnClick={() => removeJob(j.id)}>
+          <li key={j.id} className="joblist-item">
+
+            <NavLink className="btn" to={`/job/${j.id}`}>
+              {j.headline}
+            </NavLink>{" "}
+
+            {j.employer?.name && <em> {j.employer.name} </em>}
+
+            {j.workplace_address?.municipality && (
+              <div>Ort: {j.workplace_address.municipality}</div>
+            )}
+
+            {j.workplace_address?.region && (
+              <div>Län: {j.workplace_address.region}</div>
+            )}
+
+            {j.publication_date && (
+              <div>
+                Publicerad: {new Date(j.publication_date).toLocaleDateString()}
+              </div>
+            )}
+
+          {j.webpage_url && (
+            <DigiLinkExternal afHref={j.webpage_url}>
+              Läs mer
+            </DigiLinkExternal>
+              )}
+
+            <DigiButton className="btn" onAfOnClick={() => addFavorite(j)}>
+              Favoritmarkera
+            </DigiButton>
+
+            <DigiButton
+              className="btn"
+              afVariation="secondary"
+              onAfOnClick={() => removeJob(j.id)}
+            >
               Ta bort
             </DigiButton>
 
-            <NavLink to={`/job/${j.id}`}>{j.headline}</NavLink>{" "}
-            {j.employer?.name && <em> {j.employer.name} </em>}
-            {j.workplace_address?.municipality && (
-              <div>Ort: {j.workplace_address.municipality} </div>
-            )}
-            {j.workplace_address?.region && (
-              <div>Län: {j.workplace_address.region} </div>
-            )}
-            {j.publication_date && (
-              <div>
-                Publicerad: {new Date(j.publication_date).toLocaleDateString()}{" "}
-              </div>
-            )}
-            {j.webpage_url && (
-              <a href={j.webpage_url} target="_blank" rel="noreferrer">
-                <div>Läs mer</div>
-              </a>
-            )}
-
-            <DigiButton onAfOnClick={() => addFavorite(j)}>
-              Favoritmarkera
-            </DigiButton>
-            
           </li>
         ))}
       </ul>
     </section>
   );
 }
+
+
+
+
+
+
+
