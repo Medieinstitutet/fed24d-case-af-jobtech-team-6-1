@@ -1,19 +1,19 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer, createElement, type ReactNode } from "react";
 import type { Job } from "../models/Job";
 import { favoritReducer } from "../reducers/favoritReducer";
 
-type fav = {
+type Fav = {
   favorites: Job[];
   addFavorite: (job: Job) => void;
   removeFavorite: (id: string | number) => void;
   isFavorite: (id: string | number) => boolean;
 };
 
-export const FavoritContext = createContext<fav | undefined>(undefined);
+export const FavoritContext = createContext<Fav | undefined>(undefined);
 
 const KEY = "favorites";
 
-export function FavoritProvider({ children }: { children: React.ReactNode }) {
+export function FavoritProvider({ children }: { children: ReactNode }) {
   const [favoritesMap, dispatch] = useReducer(favoritReducer, {}, () => {
     try {
       const raw = typeof window !== "undefined" ? localStorage.getItem(KEY) : null;
@@ -41,10 +41,10 @@ export function FavoritProvider({ children }: { children: React.ReactNode }) {
   const isFavorite = (id: string | number) => Boolean(favoritesMap[String(id)]);
   const favorites = Object.values(favoritesMap);
 
-  return (
-    <FavoritContext.Provider value={{ favorites, addFavorite, removeFavorite, isFavorite }}>
-      {children}
-    </FavoritContext.Provider>
+  return createElement(
+    FavoritContext.Provider,
+    { value: { favorites, addFavorite, removeFavorite, isFavorite } },
+    children
   );
 }
 

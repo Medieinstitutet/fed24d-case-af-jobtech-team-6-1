@@ -1,0 +1,108 @@
+.joblist {
+  max-width: auto;
+  margin-inline: auto;
+  padding: var(--digi-space-24, 1.5rem) var(--digi-space-16, 1rem);
+
+  h1,
+  p:first-of-type {
+    text-align: left;
+  }
+
+  ul {
+    padding: 0;
+    margin: var(--digi-space-16, 1rem) 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--digi-space-16, 1rem);
+  }
+}
+
+.joblist-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--digi-space-16, 1rem);
+  border: 1px solid var(--digi-border-subtle, #e6e6e6);
+  border-radius: var(--digi-radius-lg, 12px);
+ 
+
+
+  --fav-size: 1.5rem;
+  --fav-gap: var(--digi-space-12, 0.75rem);
+  padding-right: calc(var(--digi-space-16, 1rem) + var(--fav-size) + var(--fav-gap));
+  padding-top:  calc(var(--digi-space-16, 0.5rem) + var(--fav-size) + var(--fav-gap));
+
+  .job-title { margin: 0 0 var(--digi-space-12, 0.75rem); }
+  .btn[href^="/job/"] {
+    display: block;
+    font-size: var(--digi-font-size-md, 1.23rem);
+   
+  }
+
+  .employer {
+    display: block;
+    font-size: var(--digi-font-size-md, 1.1rem);
+  }
+
+  .meta h4 {
+    margin: 0;
+    font-size: var(--digi-font-size-sm, 0.8rem);
+  }
+
+
+  .btn {
+    margin-top: auto;
+    align-self: flex-end;
+  }
+
+
+}
+
+/* -------------------------------------------------------------------------
+---------------------------HJÄRTAT----------------------------------------
+-------------------------------------------------------------------------- */
+.fav-icon {
+  position: absolute;
+  top: var(--digi-space-8, 0.5rem);
+  right: var(--digi-space-12, 0.75rem);
+  z-index: 1;
+
+  display: inline-grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  line-height: 0;
+  cursor: pointer;
+
+  --outline-scale: 1; // -----------------------------
+  --solid-scale:   0.49; //-----------------------------
+  --solid-shift-x: -6px; //fungerar enbart med dessa inställnignar, just nu
+  --solid-shift-y: 4px;  // ---------------------------------
+
+  digi-icon-heart,
+  digi-icon-heart-solid {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 3rem;
+    --digi-icon-color: var(--digi-text-subtle, #C8E9C5);
+    transform-origin: center;
+  }
+
+  digi-icon-heart { transform: scale(var(--outline-scale)); }
+  digi-icon-heart-solid {
+    display: none;
+    transform: translate(var(--solid-shift-x), var(--solid-shift-y)) scale(var(--solid-scale));
+  }
+
+  &:hover {
+    digi-icon-heart { display: none; }
+    digi-icon-heart-solid {
+      display: block;
+      --digi-icon-color: var(--digi-color-success-50, #C8E9C5);
+      filter: invert(60%) sepia(18%) saturate(1236%) hue-rotate(79deg) brightness(100%) contrast(90%);
+    }
+  }
+}
