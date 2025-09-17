@@ -88,3 +88,8 @@
     border-color: var(--digi-color-brand-30, #b3d4c7);
   }
 }
+.favorite-item a[href^="/job/"] {
+  font-weight: var(--digi-font-weight-semibold, 600);
+  font-size: var(--digi-font-size-lg, 1.25rem);
+}
+
