@@ -1,125 +1,78 @@
 .joblist {
-  max-width: 64rem;
+  max-width: auto;
   margin-inline: auto;
   padding: var(--digi-space-24, 1.5rem) var(--digi-space-16, 1rem);
 
   h1,
   p:first-of-type {
-    text-align: center;
+    text-align: left;
   }
 
   ul {
-    list-style: none;
     padding: 0;
     margin: var(--digi-space-16, 1rem) 0 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    column-gap: var(--digi-space-16, 1rem);
-    row-gap: var(--digi-space-16, 1rem);
+    gap: var(--digi-space-16, 1rem);
   }
 }
 
 .joblist-item {
-  padding: var(--digi-space-16, 1rem);
-  border-radius: var(--digi-radius-md, 8px);
-  transition: background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
-  background: var(--digi-surface, #fff);
-  border: 1px solid var(--digi-border-subtle, #e6e6e6);
-  border-radius: var(--digi-radius-lg, 12px);
-  margin: 0;
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--digi-space-8, 0.5rem);
-  box-shadow: var(--digi-shadow-sm, 0 1px 2px rgba(0,0,0,0.05));
-  position: relative; 
+  padding: var(--digi-space-16, 1rem);
+  border: 1px solid var(--digi-border-subtle, #e6e6e6);
+  border-radius: var(--digi-radius-lg, 12px);
+ 
+
+
   --fav-size: 1.5rem;
   --fav-gap: var(--digi-space-12, 0.75rem);
   padding-right: calc(var(--digi-space-16, 1rem) + var(--fav-size) + var(--fav-gap));
-  padding-top:  calc(var(--digi-space-16, 1rem) + var(--fav-size) + var(--fav-gap));
+  padding-top:  calc(var(--digi-space-16, 0.5rem) + var(--fav-size) + var(--fav-gap));
 
-  text-align: left;
-  align-items: flex-start; 
-
+  .job-title { margin: 0 0 var(--digi-space-12, 0.75rem); }
   .btn[href^="/job/"] {
-    font-weight: var(--digi-font-weight-semibold, 600);
-    font-size: var(--digi-font-size-lg, 1.25rem);
-    text-align: left; 
-    align-self: flex-start;
-    margin-top: 0;          
+    display: block;
+    font-size: var(--digi-font-size-md, 1.23rem);
+   
   }
 
-  em {
-    font-style: normal;
-    color: var(--digi-text-subtle, #555);
-    font-size: var(--digi-font-size-md, 1.125rem);
-    text-align: left; 
+  .employer {
+    display: block;
+    font-size: var(--digi-font-size-md, 1.1rem);
   }
 
-  div {
-    font-size: var(--digi-font-size-sm, 0.875rem);
-    color: var(--digi-text-subtle, #555);
-    text-align: left; 
+  .meta h4 {
+    margin: 0;
+    font-size: var(--digi-font-size-sm, 0.8rem);
   }
 
-  a {
-    inline-size: fit-content;
-  }
-
-  digi-link-external {
-    display: inline-block;
-    inline-size: fit-content;
-  }
-
-  .actions-top {
-    display: flex;
-    gap: var(--digi-space-24, 1.5rem);
-    align-items: baseline;
-
-    sc-digi-form-checkbox, 
-    digi-form-checkbox,
-    a,
-    sc-digi-link-external, 
-    digi-link-external {
-      display: inline-flex;
-      align-items:  baseline;
-      line-height: var(--digi-line-height-md, 1.25);
-    }
-
-    a {
-      svg,
-      &::part(icon) {
-        position: relative;
-        top: 2px;
-      }
-    }
-  }
 
   .btn {
     margin-top: auto;
     align-self: flex-end;
-    margin-bottom: var(--digi-space-8, 0.5rem);
   }
 
-  &--applied {
-    background-color: var(--digi-surface-selected, var(--digi-color-brand-10, #C8E9C5));
-    border-color: var(--digi-color-brand-30, #b3d4c7);
-  }
+
 }
 
 /* -------------------------------------------------------------------------
 ---------------------------HJÄRTAT----------------------------------------
 -------------------------------------------------------------------------- */
 .fav-icon {
+  position: absolute;
+  top: var(--digi-space-8, 0.5rem);
+  right: var(--digi-space-12, 0.75rem);
+  z-index: 1;
+
   display: inline-grid;
   place-items: center;
   width: 1.5rem;
   height: 1.5rem;
   line-height: 0;
   cursor: pointer;
-  position: absolute; 
-  top: var(--digi-space-8, 0.5rem);    
-  right: var(--digi-space-12, 0.75rem); 
-  z-index: 1;
 
   --outline-scale: 1; // -----------------------------
   --solid-scale:   0.49; //-----------------------------
@@ -138,10 +91,7 @@
     transform-origin: center;
   }
 
-  digi-icon-heart {
-    transform: scale(var(--outline-scale));
-  }
-
+  digi-icon-heart { transform: scale(var(--outline-scale)); }
   digi-icon-heart-solid {
     display: none;
     transform: translate(var(--solid-shift-x), var(--solid-shift-y)) scale(var(--solid-scale));

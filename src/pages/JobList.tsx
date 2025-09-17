@@ -7,6 +7,8 @@ import { useJobActions } from "../hooks/useJobAction";
 import "../styles/joblist.scss";
 import { DigiLinkExternal } from "@designsystem-se/af-react";
 import { DigiButton } from "@designsystem-se/af-react";
+import { DigiTypography, DigiLayoutBlock } from "@designsystem-se/af-react";
+import { LayoutBlockVariation } from "@designsystem-se/af";
 
 
 // behöver ha dem såhär för att inte typescript ska bråka
@@ -47,33 +49,38 @@ export default function JobList() {
         {visibleJobs.map((j) => (
           <li key={j.id} className="joblist-item">
 
-            <NavLink className="btn" to={`/job/${j.id}`}>
-              {j.headline}
-            </NavLink>{" "}
+            <DigiTypography>
+              <h2 className="job-title">
+                <NavLink className="btn" to={`/job/${j.id}`}>
+                  {j.headline}
+                </NavLink>
+              </h2>
 
-            {j.employer?.name && <em> {j.employer.name} </em>}
+              {j.employer?.name && <h3 className="employer">{j.employer.name}</h3>}
 
-            {j.workplace_address?.municipality && (
-              <div>Ort: {j.workplace_address.municipality}</div>
-            )}
+              <DigiLayoutBlock className="meta" afVariation={LayoutBlockVariation.PRIMARY}>
+                {j.workplace_address?.municipality && (
+                  <h4><strong>Ort:</strong> {j.workplace_address.municipality}</h4>
+                )}
 
-            {j.workplace_address?.region && (
-              <div>Län: {j.workplace_address.region}</div>
-            )}
+                {j.workplace_address?.region && (
+                  <h4><strong>Län:</strong> {j.workplace_address.region}</h4>
+                )}
 
-            {j.publication_date && (
-              <div>
-                Publicerad: {new Date(j.publication_date).toLocaleDateString()}
-              </div>
-            )}
+                {j.publication_date && (
+                  <h4>
+                    <strong>Publicerad:</strong>{" "}
+                    {new Date(j.publication_date).toLocaleDateString()}
+                  </h4>
+                )}
 
-          {j.webpage_url && (
-            <DigiLinkExternal afHref={j.webpage_url}>
-              Läs mer
-            </DigiLinkExternal>
-              )}
-
-
+                {j.webpage_url && (
+                  <DigiLinkExternal afHref={j.webpage_url}>
+                    Läs mer
+                  </DigiLinkExternal>
+                )}
+              </DigiLayoutBlock>
+            </DigiTypography>
 
             <span
               className="fav-icon"
