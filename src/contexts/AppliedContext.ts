@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer, createElement, type ReactNode } from "react";
 import { appliedReducer } from "../reducers/appliedReducer";
 
 type AppliedCon = {
@@ -9,15 +9,16 @@ type AppliedCon = {
 
 export const AppliedContext = createContext<AppliedCon | undefined>(undefined);
 
-  const save = (next: Record<string, true>) => {
-    if (typeof window === "undefined") return;
-    try {
-      localStorage.setItem(KEY, JSON.stringify(next));
-    } catch {}
-  };
-
 const KEY = "appliedFavorites";
-export function AppliedProvider({ children }: { children: React.ReactNode }) {
+
+const save = (next: Record<string, true>) => {
+  if (typeof window === "undefined") return;
+  try {
+    localStorage.setItem(KEY, JSON.stringify(next));
+  } catch {}
+};
+
+export function AppliedProvider({ children }: { children: ReactNode }) {
   const [appliedMap, dispatch] = useReducer(appliedReducer, {}, () => {
     try {
       const raw = typeof window !== "undefined" ? localStorage.getItem(KEY) : null;
@@ -27,7 +28,6 @@ export function AppliedProvider({ children }: { children: React.ReactNode }) {
     }
   });
 
-
   const commit = (action: any) => {
     const next = appliedReducer(appliedMap, action);
     save(next);
@@ -35,21 +35,14 @@ export function AppliedProvider({ children }: { children: React.ReactNode }) {
   };
 
   const isApplied = (id: string | number) => Boolean(appliedMap[String(id)]);
-
   const toggleApplied = (id: string | number, value?: boolean) =>
-    commit(
-      typeof value === "boolean"
-        ? { type: "SET", id, value }
-        : { type: "TOGGLE", id }
-    );
+    commit(typeof value === "boolean" ? { type: "SET", id, value } : { type: "TOGGLE", id });
+  const removeApplied = (id: string | number) => commit({ type: "REMOVE", id });
 
-  const removeApplied = (id: string | number) =>
-    commit({ type: "REMOVE", id });
-
-  return (
-    <AppliedContext.Provider value={{ isApplied, toggleApplied, removeApplied }}>
-      {children}
-    </AppliedContext.Provider>
+  return createElement(
+    AppliedContext.Provider,
+    { value: { isApplied, toggleApplied, removeApplied } },
+    children
   );
 }
 
