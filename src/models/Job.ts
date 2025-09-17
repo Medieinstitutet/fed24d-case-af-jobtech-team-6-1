@@ -6,7 +6,11 @@ export type Job = {
   publication_date?: string;
   application_deadline?: string;
   webpage_url?: string;
+  logo_url: string,
   isHidden: boolean;
+  description: {
+    text: string;
+  }
 };
 
 export type JobResult =  {
