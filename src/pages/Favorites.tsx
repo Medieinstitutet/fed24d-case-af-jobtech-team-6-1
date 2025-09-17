@@ -3,7 +3,7 @@ import { DigiButton } from "@designsystem-se/af-react";
 import { DigiFormCheckbox, DigiLinkExternal } from "@designsystem-se/af-react";
 import { ButtonVariation } from "@designsystem-se/af";
 import "../styles/favorites.scss";
-
+import { NavLink } from "react-router";
 
 export default function Favorites() {
   const {
@@ -31,7 +31,7 @@ export default function Favorites() {
               <li
                 key={id} className={applied ? "favorite-item favorite-item--applied" : "favorite-item"}
               >
-                <div>{j.headline}</div>
+                <NavLink to={`/job/${id}`}>{j.headline}</NavLink>
                 {j.employer?.name && <em>– {j.employer.name} </em>}
                 {j.workplace_address?.municipality && (
                   <div>Ort: {j.workplace_address.municipality}</div>
