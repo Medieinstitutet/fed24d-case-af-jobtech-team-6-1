@@ -2,13 +2,14 @@ import type { Job } from "../models/Job";
 
 export enum JobActionType {
   SET,
+  ADD,
   REMOVEADD,
 }
 
 export type JobAction =
-    | { type: JobActionType.SET; payload: Job[] }
-    | { type: JobActionType.REMOVEADD; payload: string };
-
+  | { type: JobActionType.SET; payload: Job[] }
+  | { type: JobActionType.ADD; payload: Job[] }
+  | { type: JobActionType.REMOVEADD; payload: string };
 
 export const JobReducer = (jobs: Job[], action: JobAction): Job[] => {
   let updateJobList: Job[] = [...jobs];
@@ -16,18 +17,16 @@ export const JobReducer = (jobs: Job[], action: JobAction): Job[] => {
   switch (action.type) {
     case JobActionType.SET:
       updateJobList = action.payload;
-      localStorage.setItem("jobs", JSON.stringify(updateJobList));
+      break;
 
+    case JobActionType.ADD:
+      updateJobList = [...jobs, ...action.payload];
       break;
 
     case JobActionType.REMOVEADD:
       updateJobList = jobs.map((j) =>
-        j.id === action.payload
-          ? { ...j, isHidden: true }
-          : j
+        j.id === action.payload ? { ...j, isHidden: true } : j
       );
-
-      localStorage.setItem("jobs", JSON.stringify(updateJobList));
       break;
 
     default:
