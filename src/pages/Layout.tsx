@@ -7,21 +7,39 @@ import { getJobs } from "../services/jobService";
 
 export const Layout = () => {
   const [jobs, dispatch] = useReducer(JobReducer, []);
+  const limit = 100;
 
   useEffect(() => {
-    if (jobs.length > 0) return; 
+    if (jobs.length > 0) return;
 
-    const fetchJobs = async () => {
-      const result = await getJobs();
-      dispatch({
-        type: JobActionType.SET,
-        payload: result.hits,
-      });
+    const fetchFirstHundredJobs = async () => {
+      try {
+        let currentOffset = 0;
+        const firstResult = await getJobs(currentOffset, limit);
+        let allJobs = [...firstResult.hits];
+        const totalJobs = firstResult.total;
+
+        while (allJobs.length < totalJobs) {
+          currentOffset += limit;
+          const nextResult = await getJobs(currentOffset, limit);
+
+          if (!nextResult.hits || nextResult.hits.length === 0) break;
+
+          allJobs = [...allJobs, ...nextResult.hits];
+        }
+
+        dispatch({
+          type: JobActionType.SET,
+          payload: allJobs,
+        });
+      } catch (error) {
+        console.error("Fel vid hämtning av jobb:", error);
+      }
     };
 
-    fetchJobs();
+    fetchFirstHundredJobs();
   }, [jobs, dispatch]);
-  
+
   return (
     <>
       <header>
