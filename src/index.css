@@ -4,10 +4,75 @@
 :root {
   padding: 0;
   
+  
   body {
     margin: 0;
+    
   }
 }
 .digi-logo__img.sc-digi-logo {
   display: none !important;
+}
+
+digi-header a[href] {
+  color: #073148 !important;
+}
+digi-header a[href]:hover,
+digi-header a[href]:focus {
+  color: #0f5479 !important;
+}
+
+main a[href]:not(.btn) {
+  color: #073148;
+  text-decoration-color: currentColor;
+}
+main a[href]:not(.btn):hover,
+main a[href]:not(.btn):focus {
+  color: #0f5479;
+}
+
+.joblist a[href],
+.favorites a[href] {
+  color: #073148 !important;
+  text-decoration-color: currentColor !important;
+}
+
+.joblist a[href]:hover,
+.favorites a[href]:hover,
+.joblist a[href]:focus,
+.favorites a[href]:focus {
+  color: #0f5479 !important;
+}
+
+digi-button.btn {
+  --digi--button--color--text--secondary--default:  #115d2d;
+  --digi--button--color--text--secondary--hover:    #115d2d;
+  --digi--button--color--text--secondary--focus:    #115d2d;
+  --digi--button--color--text--secondary--active:   #1A6C39;
+
+  --digi--button--color--border--secondary--default: #115d2d;
+  --digi--button--color--border--secondary--hover:   #2A8F4F;
+  --digi--button--color--border--secondary--focus:   #2A8F4F;
+  --digi--button--color--border--secondary--active:  #1A6C39;
+
+  --digi--button--color--icon--secondary--default: #1e6c3a;
+  --digi--button--color--icon--secondary--hover:   #115d2d;
+  --digi--button--color--icon--secondary--focus:   #115d2d;
+  --digi--button--color--icon--secondary--active:  #1A6C39;
+}
+
+digi-button:not([af-variation]),
+digi-button[af-variation="primary"] {
+  --digi--color--background--inverted-1: #115d2d !important;
+  --digi--color--background--inverted-6: #2A8F4F !important;
+  --digi--color--text--inverted: #FFFFFF !important;
+  --digi--color--border--secondary: #115d2d !important;
+}
+
+digi-header-navigation-item[af-current-page].sc-digi-header-navigation-item {
+  --digi--header-navigation-item-indicator--active--color: #115d2d !important;
+}
+
+.digi-header-navigation-item-indicator--active.sc-digi-header-navigation-item {
+  --INDICATOR-COLOR: #115d2d !important; 
 }

@@ -44,7 +44,7 @@ export default function JobList() {
 
   return (
     <section className="joblist">
-      <h1>Jobb Jobb Jobb</h1>
+      <h1>Jobbannonser:</h1>
       <ul>
         {visibleJobs.map((j) => (
           <li key={j.id} className="joblist-item">
